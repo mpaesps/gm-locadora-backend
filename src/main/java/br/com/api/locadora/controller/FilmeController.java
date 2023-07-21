@@ -15,16 +15,15 @@ import org.springframework.web.bind.annotation.*;
 public class FilmeController {
 
     @Autowired
-    FilmeRepository repository;
     FilmeService filmeService;
 
     @PostMapping
     @Transactional
-    public ResponseEntity<String> cadastrarFilme(@RequestBody DadosCadastroFilme dados){
-        var filme = new Filme(dados);
-        repository.save(filme);
-        return ResponseEntity.ok("Filme cadastrado");
+    public ResponseEntity<Filme> cadastrarFilme(@RequestBody Filme filme){
+        filmeService.cadastrarFilme(filme);
+        return ResponseEntity.ok(filme);
     }
+
 
     @DeleteMapping("/{id}")
     @Transactional

@@ -3,6 +3,8 @@ package br.com.api.locadora.service;
 import br.com.api.locadora.filme.Filme;
 import br.com.api.locadora.filme.FilmeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,13 +32,13 @@ public class FilmeService {
     }
 
     public  Filme atualizarFilme(Long id, Filme filme) {
-        Filme updtFilme = buscarFilmeId(filme.getId());
-        updtFilme.setTitulo(filme.getTitulo());
-        updtFilme.setDuracao(filme.getDuracao());
-        updtFilme.setAno(filme.getAno());
-        updtFilme.setGenero(filme.getGenero());
-        return filmeRepository.save(updtFilme);
-    }
+        if (filme != null) {
+            ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreNullValues();
+            Example<Filme> example = Example.of(filme, matcher);
+        }
+        Filme updtFilme = filmeRepository.save(filme);
 
+        return updtFilme;
+    }
 
 }

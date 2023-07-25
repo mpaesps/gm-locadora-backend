@@ -1,14 +1,12 @@
 package br.com.api.locadora.filme;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Table(name="filmes")
 @Entity(name ="Filme")
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
@@ -28,6 +26,7 @@ public class Filme {
         this.ano = dados.ano();
         this.genero = dados.genero();
     }
+
 
 
 }
